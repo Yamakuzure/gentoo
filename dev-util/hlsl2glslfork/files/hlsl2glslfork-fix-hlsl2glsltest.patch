@@ -1,0 +1,14 @@
+--- a/tests/hlsl2glsltest/hlsl2glsltest.cpp	2020-09-20 18:13:47.280408818 +0200
++++ b/tests/hlsl2glsltest/hlsl2glsltest.cpp	2020-09-20 18:14:24.294410951 +0200
+@@ -284,9 +284,10 @@
+ 		glGetShaderInfoLog = (PFNGLGETSHADERINFOLOGPROC)wglGetProcAddress("glGetShaderInfoLog");
+ 		glGetShaderiv = (PFNGLGETSHADERIVPROC)wglGetProcAddress("glGetShaderiv");
+ 	}
+-#endif
+ 	
+ 	ReleaseDC(wnd, dc);
++#endif
++
+ 	return hasGLSL;
+ }
+ 

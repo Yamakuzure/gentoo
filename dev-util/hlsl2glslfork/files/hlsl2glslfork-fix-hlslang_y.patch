@@ -1,0 +1,11 @@
+--- a/hlslang/MachineIndependent/hlslang.y	2020-09-20 18:04:02.735375125 +0200
++++ b/hlslang/MachineIndependent/hlslang.y	2020-09-20 18:04:09.053375489 +0200
+@@ -96,7 +96,7 @@
+ 
+ // Note: modern bison (from 2.7 would use %define api.pure full, but we still need to support Bison 2.3
+ // for Mac 10.9). So use the legacy syntax.
+-%pure-parser
++%define api.pure
+ 
+ %expect 1 /* One shift reduce conflict because of if | else */
+ %token <lex> CONST_QUAL STATIC_QUAL BOOL_TYPE FLOAT_TYPE INT_TYPE STRING_TYPE FIXED_TYPE HALF_TYPE

@@ -1,0 +1,79 @@
+--- a/CMakeLists.txt	2020-09-20 18:19:08.753427347 +0200
++++ b/CMakeLists.txt	2020-09-20 18:20:00.885430352 +0200
+@@ -2,7 +2,11 @@
+ 
+ project(hlsl2glslfork)
+ 
+-set(CMAKE_SUPPRESS_REGENERATION TRUE)
++set(CMAKE_SUPPRESS_REGENERATION FALSE)
++
++if(UNIX AND NOT APPE)
++  set(LINUX TRUE)
++endif()
+ 
+ set(HEADER_FILES
+   hlslang/Include/BaseTypes.h
+@@ -105,7 +109,7 @@
+                                          
+ 
+ # Add system specific settings
+-if (WIN32)
++if(WIN32)
+     set(OSDEPENDENT_FILES
+       hlslang/OSDependent/Windows/main.cpp
+       hlslang/OSDependent/Windows/osinclude.h
+@@ -136,7 +140,9 @@
+     
+     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /D\"_HAS_ITERATOR_DEBUGGING=0\" /D\"_SECURE_SCL=0\" /D\"_CRT_SECURE_NO_WARNINGS\"")
+     SET(TEST_LIBS opengl32.lib)
+-elseif (APPLE)
++endif()
++
++if(APPLE)
+     set(OSDEPENDENT_FILES
+       hlslang/OSDependent/Mac/osinclude.h
+       hlslang/OSDependent/Mac/ossource.cpp
+@@ -164,7 +170,9 @@
+     FIND_LIBRARY(OPENGL_LIBRARY OpenGL)
+ 	FIND_LIBRARY(COCOA_LIBRARY Cocoa)
+     SET(TEST_LIBS ${OPENGL_LIBRARY} ${COCOA_LIBRARY})
+-elseif (UNIX)
++endif()
++
++if(LINUX)
+     set(OSDEPENDENT_FILES
+       hlslang/OSDependent/Linux/osinclude.h
+       hlslang/OSDependent/Linux/ossource.cpp
+@@ -172,11 +180,10 @@
+     source_group("OSDependent\\Linux" FILES ${OSDEPENDENT_FILES})
+     include_directories(${CMAKE_CURRENT_SOURCE_DIR}/hlslang/OSDependent/Linux)
+ 
+-    add_custom_command(OUTPUT hlslang/MachineIndependent/hlslang_tab.cpp hlslang/MachineIndependent/hlslang_tab.h 
++    add_custom_command(OUTPUT hlslang/MachineIndependent/hlslang_tab.cpp hlslang/MachineIndependent/hlslang_tab.hpp 
+                          COMMAND set ARGS "BISON_SIMPLE=../../tools/bison.simple"
+                          COMMAND set ARGS "BISON_HAIRY=../../tools/bison.simple"
+                          COMMAND bison ARGS -o hlslang_tab.cpp -d -t -v hlslang.y
+-                         COMMAND mv hlslang_tab.hpp hlslang_tab.h
+                          MAIN_DEPENDENCY hlslang/MachineIndependent/hlslang.y
+                          WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/hlslang/MachineIndependent
+                          COMMENT "Executing Bison on hlslang.y"
+@@ -185,7 +192,7 @@
+     add_custom_command(OUTPUT hlslang/MachineIndependent/Gen_hlslang.cpp
+                          COMMAND flex ARGS hlslang.l
+                          MAIN_DEPENDENCY hlslang/MachineIndependent/hlslang.l
+-                         DEPENDS hlslang/MachineIndependent/hlslang_tab.h
++                         DEPENDS hlslang/MachineIndependent/hlslang_tab.hpp
+                          WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/hlslang/MachineIndependent
+                          COMMENT "Executing flex on hlslang.l"
+                       )
+--- a/hlslang/MachineIndependent/hlslang.l	2020-09-20 18:21:53.417436838 +0200
++++ b/hlslang/MachineIndependent/hlslang.l	2020-09-20 18:22:07.621437657 +0200
+@@ -36,7 +36,7 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include "ParseHelper.h"
+-#include "hlslang_tab.h"
++#include "hlslang_tab.hpp"
+ 
+ /* windows only pragma */
+ #ifdef _MSC_VER

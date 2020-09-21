@@ -1,0 +1,10 @@
+--- a/CMakeLists.txt	2020-09-21 12:52:47.257432477 +0200
++++ b/CMakeLists.txt	2020-09-21 12:53:21.165433684 +0200
+@@ -16,7 +16,6 @@
+ else()
+     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Os -DNDEBUG")
+     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Os -DNDEBUG")
+-    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -s")
+ endif()
+ 
+ file(GLOB glcpp-library_sources src/glsl/glcpp/*.c src/util/*.c)

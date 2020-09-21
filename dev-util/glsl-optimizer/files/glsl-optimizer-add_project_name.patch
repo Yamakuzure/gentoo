@@ -1,0 +1,10 @@
+--- a/CMakeLists.txt	2020-09-21 12:24:24.228371854 +0200
++++ b/CMakeLists.txt	2020-09-21 12:24:49.425372751 +0200
+@@ -1,5 +1,7 @@
+ cmake_minimum_required(VERSION 2.8)
+ 
++project(GLSL-Optimizer)
++
+ include_directories(include)
+ include_directories(src/mesa)
+ include_directories(src/mapi)

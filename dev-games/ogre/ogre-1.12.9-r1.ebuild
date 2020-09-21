@@ -20,11 +20,13 @@ SLOT="0/1.12"
 KEYWORDS="~amd64 ~arm ~x86"
 
 IUSE="assimp +cache cg debug deprecated doc double-precision egl examples +freeimage
-	gles2 hlsl2glsl json openexr +opengl pch profile resman-pedantic tools"
+	gles2 glsl-optimizer hlsl2glsl json openexr +opengl pch profile resman-pedantic
+	tools"
 
 REQUIRED_USE="
 	|| ( gles2 opengl )
 	hlsl2glsl? ( gles2 )
+	glsl-optimizer? ( gles2 )
 "
 
 RESTRICT="test" #139905
@@ -43,6 +45,7 @@ RDEPEND="
 	egl? ( media-libs/mesa[egl] )
 	freeimage? ( media-libs/freeimage )
 	gles2? ( media-libs/mesa[gles2] )
+	glsl-optimizer? ( dev-util/glsl-optimizer )
 	hlsl2glsl? ( dev-util/hlsl2glslfork )
 	json? ( dev-libs/rapidjson )
 	openexr? ( media-libs/openexr:= )

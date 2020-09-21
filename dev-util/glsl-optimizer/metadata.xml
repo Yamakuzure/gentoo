@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+        <maintainer type="person">
+                <email>sven.eden@prydeworx.com</email>
+                <name>Sven Eden</name>
+        </maintainer>
+        <maintainer type="project">
+                <email>proxy-maint@gentoo.org</email>
+                <name>Proxy Maintainers</name>
+        </maintainer>
+        <longdescription>
+A C++ library that takes GLSL shaders, does some GPU-independent optimizations on them and outputs GLSL or Metal source back. Optimizations are function inlining, dead code removal, copy propagation, constant folding, constant propagation, arithmetic optimizations and so on.
+
+Apparently quite a few mobile platforms are pretty bad at optimizing shaders; and unfortunately they also lack offline shader compilers. So using a GLSL optimizer offline before can make the shader run much faster on a platform like that. See performance numbers in this blog post.
+
+Even for drivers that have decent shader optimization, GLSL optimizer could be useful to just strip away dead code, make shaders smaller and do uniform/input reflection offline.
+
+Almost all actual code is Mesa 3D's GLSL compiler; all this library does is spits out optimized GLSL or Metal back, and adds GLES type precision handling to the optimizer.
+
+This GLSL optimizer is made for Unity's purposes and is built-in starting with Unity 3.0.
+
+GLSL Optimizer is licensed according to the terms of the MIT license.
+        </longdescription>
+</pkgmetadata>

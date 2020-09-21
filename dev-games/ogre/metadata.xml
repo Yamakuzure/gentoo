@@ -95,6 +95,9 @@ Exporters
     <flag name="gles2" restrict="~dev-games/ogre-1.9.0">Build OpenGL ES 2.x RenderSystem</flag>
     <flag name="gles2" restrict="~dev-games/ogre-1.12.9">Build OpenGL ES2/3 RenderSystem</flag>
     <flag name="gles3" restrict="~dev-games/ogre-1.9.0">Enable OpenGL ES 3.x Features</flag>
+    <flag name="glsl-optimizer">
+        Optimize shaders using dev-util/glsl-optimizer. Especially useful with imported HLSL shaders
+    </flag>
     <flag name="hlsl2glsl">Use dev-util/hlsl2glslfork to enable importing of HLSL shaders</flag>
     <flag name="json">Use dev-libs/rapidjson (needed by Hlms JSON materials)</flag>
     <flag name="legacy-animations">
